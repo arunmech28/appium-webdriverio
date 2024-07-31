@@ -6,7 +6,7 @@ export const config: WebdriverIO.Config = {
     // Specs
     // ============
     specs: [
-        '../tests/specs/**/app*.spec.js',
+        '../tests/specs/apptest.spec.js',
     ],
     exclude: [
         // Exclude this one because the test can only be executed on emulators/simulators
@@ -17,10 +17,17 @@ export const config: WebdriverIO.Config = {
     // Browserstack specific config
     // =============================
     // User configuration
-    user: process.env.BROWSERSTACK_USER || 'BROWSERSTACK_USER',
-    key: process.env.BROWSERSTACK_ACCESS_KEY || 'BROWSERSTACK_ACCESS_KEY',
+    user: process.env.BROWSERSTACK_USERNAME || 'arunpandian5',
+    key: process.env.BROWSERSTACK_ACCESS_KEY || 'Uhp2Xx2ThptLfDYLcF47',
     // Use browserstack service
-    services: ['browserstack'],
+    services: [['browserstack', {
+        opts: {
+            proxyHost: '',
+            proxyPort: '',
+            proxyUser: '',
+            proxyPass: ''
+        }
+    }]],
 
     // ============
     // Capabilities
@@ -30,20 +37,21 @@ export const config: WebdriverIO.Config = {
     capabilities: [
         {
             // Set URL of the application under test
-            'appium:app': process.env.BROWSERSTACK_APP_ID || 'BROWSERSTACK_APP_ID',
+            // 'appium:app': 'bs://sample.app',
 
             'bstack:options': {
                 // Set your BrowserStack config
                 debug: true,
 
                 // Specify device and os_version for testing
-                device: 'Google Pixel 3',
-                os_version: '9.0',
+                deviceName: 'iPhone 14 Pro Max',
+                osVersion: '16',
+                platformName: 'ios',
 
                 // Set other BrowserStack capabilities
-                projectName: 'wdio-test-project',
-                buildName: 'android',
-                sessionName: 'wdio-test'
+                // projectName: 'wdio-test-project',
+                // buildName: 'android',
+                // sessionName: 'wdio-test'
             }
         },
     ] as WebdriverIO.Capabilities[]
